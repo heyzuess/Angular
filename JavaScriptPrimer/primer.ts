@@ -95,13 +95,13 @@ let name2 = "Jesse";
 if (name2 == "Jesse") {
     console.log("Name is Jesse");
 } else
-if (name == "Jaqui") {
+if (name2 == "Jaqui") {
     console.log("Name is Jaqui");
 } else {
     console.log("Name is neither Jesse or Jaqui");
 }
 
-switch (name) {
+switch (name2) {
     case "Jesse":
         console.log("Name is Jesse");
         break;
@@ -135,3 +135,115 @@ let totalValue = products
     .reduce((prev, item) => prev + (item.price * item.stock), 0);
 
 console.log("Total value: $" + totalValue.toFixed(2));
+
+/*
+let myData = new Object();
+myData.name = "Jesse";
+myData.weather = "sunny";
+
+console.log("Hello " + myData.name + ".");
+console.log("Today is " + myData.weather + ".");
+*/
+
+let myData2 = {
+    name: "Jesse",
+    weather: "sunny",
+    printMessages: function() {
+        console.log("Hello " + this.name + ".");
+        console.log("Today is " + this.weather + ".");
+    }
+};
+
+myData2.printMessages();
+
+class MyClass {
+    name: string;
+    weather: string;
+
+    constructor(name, weather) {
+        this.name = name;
+        this.weather = weather;
+    }
+
+    printMessages() : void {
+        console.log("Hello " + this.name + ".");
+        console.log("Today is " + this.weather + ".");
+    }
+}
+
+let myData3 = new MyClass("Jesse", "sunny");
+myData3.printMessages();
+
+class MyClass2 {
+    name: string;
+    private _weather: string;
+
+    constructor(name, weather) {
+        this.name = name;
+        this.weather = weather;
+    }
+
+    set weather(value) {
+        this._weather = value;
+    }
+
+    get weather() {
+        return `Today is ${this._weather}`;
+    }
+
+    printMessages() {
+        console.log("Hello " + this.name + ".");
+        console.log("Today is " + this.weather + ".");
+    }
+}
+
+let myData4 = new MyClass("Jesse", "sunny");
+myData4.printMessages();
+
+class MySubClass extends MyClass2 {
+    city: string;
+
+    constructor(name, weather, city) {
+        super(name, weather);
+        this.city = city;
+    }
+
+    printMessages() {
+        super.printMessages();
+        console.log(`You are in ${this.city}`);
+    }
+}
+
+let myData5 = new MySubClass("Jesse", "sunny", "Los Angeles");
+myData5.printMessages();
+
+import * as NameAndWeatherLocation from "./modules/NameAndWeather";
+import { Name as OtherName } from "./modules/DuplicateName";
+
+let name = new NameAndWeatherLocation.Name("Jesse", "Iberri");
+let loc = new NameAndWeatherLocation.WeatherLocation("raining", "Los Angeles");
+let other = new OtherName();
+
+console.log(name.nameMessage);
+console.log(loc.weatherMessage);
+console.log(other.message);
+
+import { TempConverter } from "./tempConverter";
+
+let cTemp = TempConverter.convertFtoC(38);
+
+console.log(`The temp is ${cTemp}C`);
+
+let tuple: [string, string, string];
+tuple = ["London", "raining", TempConverter.convertFtoC("38")];
+console.log(`It is ${tuple[2]} degrees C and ${tuple[1]} in ${tuple[0]}`);
+
+let cities: { [index: string]: [string, string] } = {};
+
+cities["London"] = ["raining", TempConverter.convertFtoC("38")];
+cities["Paris"] = ["sunny", TempConverter.convertFtoC("52")];
+cities["Berlin"] = ["snowing", TempConverter.convertFtoC("23")];
+
+for (let key in cities) {
+    console.log(`${key}: ${cities[key][0]}, ${cities[key][1]}`);
+}
